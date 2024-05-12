@@ -36,7 +36,17 @@ address
 county
 dietaryRestriction
 }
+class FoodDeliveryApp {
+List<Driver> drivers
+List<Restaurant> restaurants
+List<Customer> customers
+List<Order> orders
+}
+FoodDeliveryApp "1" *-- "*" Driver
+FoodDeliveryApp "1" *-- "*" Order
+FoodDeliveryApp "1" *-- "*" Restaurant
+FoodDeliveryApp "1" *-- "*" Customer
 Order "1" o-- "1" Driver
-Customer "1" *-- "*" Order
+Customer "1" o-- "*" Order
 Order "1" o-- "1" Restaurant
 @enduml

@@ -4,8 +4,15 @@ class Driver {
 	private LocalTime startShiftTime=null;
 	private LocalTime endShiftTime=null;
 	private String county=null;
+	private boolean currentlyDriving=false;
 	public boolean isAvailable() {
 		LocalTime now = LocalTime.now();
-		return now.compareTo(startShiftTime)>=0 && now.compareTo(endShiftTime)<=0;
+		return !currentlyDriving && now.compareTo(startShiftTime)>=0 && now.compareTo(endShiftTime)<0;
+	}
+	public void startDrive() {
+		currentlyDriving=true;
+	}
+	public void endDrive() {
+		currentlyDriving=false;
 	}
 }
