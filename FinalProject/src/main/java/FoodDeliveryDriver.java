@@ -7,6 +7,6 @@ public class FoodDeliveryDriver {
 		restaurant.add("Burger");
 		cppFoodDelivery.register(restaurant);*/
 
-		System.out.println("Hello");
+		System.out.println("Hi");
 	}
 }
