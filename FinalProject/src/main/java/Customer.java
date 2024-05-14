@@ -1,11 +1,20 @@
-public class Customer {
+public class Customer extends User implements Observer{
 
-	private String name=null;
-	private String address=null;
-	private String county=null; 
-	private String dietaryRestriction=null; // should be an enum?
+	private DietaryRestriction dietaryRestriction;
 
-	public Customer(String name) {
-		this.name=name;
+	// Customer has everything a user has + dietary restriction
+	public Customer(String name, String address, String county, DietaryRestriction dietaryRestriction) {
+		super(name, address, county);
+		this.dietaryRestriction = dietaryRestriction;
+	}
+
+	// Updates order status for customer
+	@Override
+	public void update(String status){
+		System.out.println(name + " received order status update: " + status);
+	}
+
+	public DietaryRestriction getDietaryRestriction() {
+		return dietaryRestriction;
 	}
 }

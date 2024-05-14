@@ -1,29 +1,33 @@
-import java.time.*;
 import java.util.*;
 
-public class Restaurant {
+public class Restaurant extends User {
+	private final String operatingHours;
+	private final String cuisineType;
+	private final List<String> menu;
+	private final Map<String, List<String>> meals;
 
-	public final String name;
-	public final String address=null;
-	public final String county=null;
-	private LocalTime openingHour=null;
-	private LocalTime closingHour=null;
-	public final List<String> meals=new ArrayList<>();
-
-	public Restaurant(String name) {
-		this.name=name;
+	// Restaurant has everything a user has + operatingHours, cuisineType, menu, and meals
+	public Restaurant(String name, String address, String county, String operatingHours, String cuisineType, List<String> menu, Map<String, List<String>> meals) {
+		super(name, address, county);
+		this.operatingHours = operatingHours;
+		this.cuisineType = cuisineType;
+		this.menu = menu;
+		this.meals = meals;
 	}
 
-	public boolean isOpen() {
-		LocalTime now = LocalTime.now();
-		return now.compareTo(openingHour)>=0 && now.compareTo(closingHour)<=0;
+	public String getOperatingHours() {
+		return operatingHours;
 	}
 
-	public void add(String meal) {
-		meals.add(meal);
+	public String getCuisineType() {
+		return cuisineType;
 	}
 
-	public void remove(String meal) {
-		meals.remove(meal);
+	public List<String> getMenu() {
+		return menu;
+	}
+
+	public Map<String, List<String>> getMeals() {
+		return meals;
 	}
 }

@@ -1,23 +1,20 @@
-import java.time.*;
+public class Driver extends User implements Observer {
 
-public class Driver {
+	private final Shift shift;
 
-	public final String name=null;
-	private LocalTime startShiftTime=null;
-	private LocalTime endShiftTime=null;
-	private String county=null;
-	private boolean currentlyDriving=false;
-
-	public boolean isAvailable() {
-		LocalTime now = LocalTime.now();
-		return !currentlyDriving && now.compareTo(startShiftTime)>=0 && now.compareTo(endShiftTime)<0;
+	// Driver has everything a user has + a shift. Shift is an enum
+	public Driver(String name, String address, String county, Shift shift) {
+		super(name, address, county);
+		this.shift = shift;
 	}
 
-	public void startDrive() {
-		currentlyDriving=true;
+	// Updates delivery status for driver
+	@Override
+	public void update(String status) {
+		System.out.println(name + " received delivery status update: " + status);
 	}
 
-	public void endDrive() {
-		currentlyDriving=false;
+	public Shift getShift() {
+		return shift;
 	}
 }

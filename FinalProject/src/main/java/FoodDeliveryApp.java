@@ -2,8 +2,8 @@ import java.util.*;
 
 public class FoodDeliveryApp {
 
-	List<Customer> customers=new ArrayList<>();
-	List<Driver> drivers=new ArrayList<>();
+	List<Customer> customers = new ArrayList<>();
+	List<Driver> drivers = new ArrayList<>();
 	List<Restaurant> restaurants = new ArrayList<>();
 	List<Order> currentOrders = new ArrayList<>();
 
