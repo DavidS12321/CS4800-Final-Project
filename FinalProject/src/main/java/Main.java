@@ -44,6 +44,7 @@ public class Main {
 		System.out.println("\nDriver: " + order.getDriver().getName());
 		System.out.println("Driver Address: " + order.getDriver().getAddress());
 		System.out.println("Driver County: " + order.getDriver().getCounty());
+		System.out.println("Driver Shift: " + order.getDriver().getShift().getTime());
 		System.out.println("\n" + order.getRestaurant().getName() + " Food Items: " + order.getFoodItems());
 		System.out.println("Order Creation Time: " + order.getOrderCreationTime());
 		System.out.println("Order Pickup Time: " + order.getOrderPickupTime());
