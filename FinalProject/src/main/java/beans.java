@@ -9,6 +9,6 @@ public class beans extends Topping{
     @Override
     public String displayItem()
     {
-        return beansName;
+        return this.beansName;
     }
 }

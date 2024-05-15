@@ -9,7 +9,7 @@ public class Topping implements menuItem{
     @Override
     public String displayItem()
     {
-       return name;
+       return this.name;
     }
 
     
