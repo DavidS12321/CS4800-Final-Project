@@ -1,13 +1,12 @@
+import java.util.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.time.LocalTime;
 
 public class Order {
     private final Restaurant restaurant;
     private final Customer customer;
     private final Driver driver;
-    private DietaryRestriction dietaryRestriction;
+    private final DietaryRestriction dietaryRestriction;
     private List<String> foodItems;
     private LocalDateTime orderCreationTime;
     private LocalDateTime orderPickupTime;
@@ -22,61 +21,73 @@ public class Order {
         this.orderCreationTime = LocalDateTime.now();
     }
 
-    public Restaurant getRestaurant() {
-        return restaurant;
+    public boolean placeOrder() {
+        LocalTime currentTime = LocalTime.now();
+        LocalTime openingTime = LocalTime.parse(restaurant.getOperatingHours().split(" - ")[0]);
+        LocalTime closingTime = LocalTime.parse(restaurant.getOperatingHours().split(" - ")[1]);
+
+        if (isWithinOperatingHours(currentTime, openingTime, closingTime) && isWithinDriverShift(currentTime, driver.getShift())) {
+            this.orderCreationTime = LocalDateTime.now();
+            this.orderPickupTime = this.orderCreationTime.plusHours(1); // Example: pickup time is 1 hour after creation
+            this.orderDeliveryTime = this.orderPickupTime.plusHours(1); // Example: delivery time is 1 hour after pickup
+            return true;
+        }
+        return false;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    // Create the order and print the details
+    public void printOrder(){
+        OrderManager orderManager = OrderManager.getInstance();
+        orderManager.addObserver(customer);
+        orderManager.addObserver(driver);
+
+        Order order = new Order(restaurant, customer, driver);
+        if (order.placeOrder()) {
+            order.generateFoodItems();
+            order.setOrderPickupTime(LocalDateTime.now().plusHours(1)); // Pickup time is 1 hour from now
+            order.setOrderDeliveryTime(LocalDateTime.now().plusHours(2)); // Delivery time is 2 hours from now
+
+            // Notify observers
+            orderManager.notifyObservers("Order #1 is ready for pickup.");
+
+            // Print order details
+            System.out.println("\nOrder Details:");
+            System.out.println("\nRestaurant: " + order.getRestaurant().getName());
+            System.out.println("Restaurant Menu: " + order.getRestaurant().getMenu());
+            System.out.println("Restaurant Cuisine: " + order.getRestaurant().getCuisineType());
+            System.out.println("\nCustomer: " + order.getCustomer().getName());
+            System.out.println("Customer Address: " + order.getCustomer().getAddress());
+            System.out.println("Customer County: " + order.getCustomer().getCounty());
+            System.out.println("Dietary Restriction: " + order.getDietaryRestriction());
+            System.out.println("\nDriver: " + order.getDriver().getName());
+            System.out.println("Driver Address: " + order.getDriver().getAddress());
+            System.out.println("Driver County: " + order.getDriver().getCounty());
+            System.out.println("Driver Shift: " + order.getDriver().getShift().getStartTime() + " - " + order.getDriver().getShift().getEndTime());
+            System.out.println("\n" + order.getRestaurant().getName() + " Food Items: " + order.getFoodItems());
+            System.out.println("Order Creation Time: " + order.getOrderCreationTime());
+            System.out.println("Order Pickup Time: " + order.getOrderPickupTime());
+            System.out.println("Order Delivery Time: " + order.getOrderDeliveryTime());
+        } else {
+            System.out.println("Order cannot be placed at this time.");
+            System.out.println("Driver Shift: " + order.getDriver().getShift().getStartTime() + " - " + order.getDriver().getShift().getEndTime());
+        }
     }
 
-    public Driver getDriver() {
-        return driver;
+    // Check to see if order time is during restaurant's operating hours
+    private boolean isWithinOperatingHours(LocalTime currentTime, LocalTime openingTime, LocalTime closingTime) {
+        return !currentTime.isBefore(openingTime) && !currentTime.isAfter(closingTime);
     }
 
-    public DietaryRestriction getDietaryRestriction() {
-        return dietaryRestriction;
-    }
+    // Check to see if order time is during driver's shift
+    private boolean isWithinDriverShift(LocalTime currentTime, Shift shift) {
+        LocalTime shiftStartTime = LocalTime.parse(shift.getStartTime());
+        LocalTime shiftEndTime = LocalTime.parse(shift.getEndTime());
 
-    public List<String> getFoodItems() {
-        return foodItems;
-    }
-
-    public LocalDateTime getOrderCreationTime() {
-        return orderCreationTime;
-    }
-
-    public LocalDateTime getOrderPickupTime() {
-        return orderPickupTime;
-    }
-
-    public LocalDateTime getOrderDeliveryTime() {
-        return orderDeliveryTime;
-    }
-
-    public void setOrderPickupTime(LocalDateTime orderPickupTime) {
-        this.orderPickupTime = orderPickupTime;
-    }
-
-    public void setOrderDeliveryTime(LocalDateTime orderDeliveryTime) {
-        this.orderDeliveryTime = orderDeliveryTime;
-    }
-
-    // Add a food item to the order
-    public void addFoodItem(String foodItem) {
-        this.foodItems.add(foodItem);
-    }
-
-    // Generate food items based on dietary restriction
-    public void generateFoodItems() {
-        Random random = new Random();
-        String protein = selectProtein(random, dietaryRestriction);
-        String carb = selectCarb(random, dietaryRestriction);
-        String fat = selectFat(random, dietaryRestriction);
-
-        if (protein != null) this.foodItems.add(protein);
-        if (carb != null) this.foodItems.add(carb);
-        if (fat != null) this.foodItems.add(fat);
+        if (shiftStartTime.isBefore(shiftEndTime)) {
+            return !currentTime.isBefore(shiftStartTime) && !currentTime.isAfter(shiftEndTime);
+        } else {
+            return !currentTime.isBefore(shiftStartTime) || !currentTime.isAfter(shiftEndTime);
+        }
     }
 
     // Selects macros depending on dietary restrictions
@@ -129,5 +140,62 @@ public class Order {
             default:
                 return null;
         }
+    }
+
+    // Generate food items based on dietary restriction
+    public void generateFoodItems() {
+        Random random = new Random();
+        String protein = selectProtein(random, dietaryRestriction);
+        String carb = selectCarb(random, dietaryRestriction);
+        String fat = selectFat(random, dietaryRestriction);
+
+        if (protein != null) this.foodItems.add(protein);
+        if (carb != null) this.foodItems.add(carb);
+        if (fat != null) this.foodItems.add(fat);
+    }
+
+    // Add a food item to the order
+    public void addFoodItem(String foodItem) {
+        this.foodItems.add(foodItem);
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public Driver getDriver() {
+        return driver;
+    }
+
+    public DietaryRestriction getDietaryRestriction() {
+        return dietaryRestriction;
+    }
+
+    public List<String> getFoodItems() {
+        return foodItems;
+    }
+
+    public LocalDateTime getOrderCreationTime() {
+        return orderCreationTime;
+    }
+
+    public LocalDateTime getOrderPickupTime() {
+        return orderPickupTime;
+    }
+
+    public LocalDateTime getOrderDeliveryTime() {
+        return orderDeliveryTime;
+    }
+
+    public void setOrderPickupTime(LocalDateTime orderPickupTime) {
+        this.orderPickupTime = orderPickupTime;
+    }
+
+    public void setOrderDeliveryTime(LocalDateTime orderDeliveryTime) {
+        this.orderDeliveryTime = orderDeliveryTime;
     }
 }
