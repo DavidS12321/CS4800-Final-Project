@@ -26,12 +26,23 @@ public class Order {
         LocalTime openingTime = LocalTime.parse(restaurant.getOperatingHours().split(" - ")[0]);
         LocalTime closingTime = LocalTime.parse(restaurant.getOperatingHours().split(" - ")[1]);
 
-        if (isWithinOperatingHours(currentTime, openingTime, closingTime) && isWithinDriverShift(currentTime, driver.getShift())) {
+        if (isWithinOperatingHours(currentTime, openingTime, closingTime) && isWithinDriverShift(currentTime, driver.getShift()) && isSameCounty()) {
             this.orderCreationTime = LocalDateTime.now();
             this.orderPickupTime = this.orderCreationTime.plusHours(1); // Example: pickup time is 1 hour after creation
             this.orderDeliveryTime = this.orderPickupTime.plusHours(1); // Example: delivery time is 1 hour after pickup
             return true;
         }
+
+        if (!isWithinOperatingHours(currentTime, openingTime, closingTime)) {
+            System.out.println("Order cannot be placed: Current time " + currentTime + " is not within restaurant's operating hours " + restaurant.getOperatingHours());
+        }
+        if (!isWithinDriverShift(currentTime, driver.getShift())) {
+            System.out.println("Order cannot be placed: Current time " + currentTime + " is not within driver's shift " + driver.getShift().getStartTime() + " - " + driver.getShift().getEndTime());
+        }
+        if (!isSameCounty()) {
+            System.out.println("Order cannot be placed: Customer, restaurant, and driver are not in the same county.");
+        }
+
         return false;
     }
 
@@ -48,7 +59,7 @@ public class Order {
             order.setOrderDeliveryTime(LocalDateTime.now().plusHours(2)); // Delivery time is 2 hours from now
 
             // Notify observers
-            orderManager.notifyObservers("Order #1 is ready for pickup.");
+            orderManager.notifyObservers("Order is ready for pickup.");
 
             // Print order details
             System.out.println("\nOrder Details:");
@@ -67,9 +78,6 @@ public class Order {
             System.out.println("Order Creation Time: " + order.getOrderCreationTime());
             System.out.println("Order Pickup Time: " + order.getOrderPickupTime());
             System.out.println("Order Delivery Time: " + order.getOrderDeliveryTime());
-        } else {
-            System.out.println("Order cannot be placed at this time.");
-            System.out.println("Driver Shift: " + order.getDriver().getShift().getStartTime() + " - " + order.getDriver().getShift().getEndTime());
         }
     }
 
@@ -88,6 +96,10 @@ public class Order {
         } else {
             return !currentTime.isBefore(shiftStartTime) || !currentTime.isAfter(shiftEndTime);
         }
+    }
+
+    private boolean isSameCounty(){
+        return driver.getCounty().equals(restaurant.getCounty()) && driver.getCounty().equals(customer.getCounty());
     }
 
     // Selects macros depending on dietary restrictions

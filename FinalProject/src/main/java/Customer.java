@@ -1,6 +1,6 @@
 public class Customer extends User implements Observer{
 
-	private DietaryRestriction dietaryRestriction;
+	private final DietaryRestriction dietaryRestriction;
 
 	// Customer has everything a user has + dietary restriction
 	public Customer(String name, String address, String county, DietaryRestriction dietaryRestriction) {
