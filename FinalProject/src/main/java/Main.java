@@ -27,9 +27,9 @@ public class Main {
 
 		// Create drivers
 		List<Driver> drivers = Arrays.asList(
-				(Driver) UserFactory.createUser("Driver", "Driver 1", "101 Pine St", "LA County", Shift.THIRD_SHIFT, null, null, null, null, null)
-				/*(Driver) UserFactory.createUser("Driver", "Driver 2", "202 Maple St", "Orange County", Shift.THIRD_SHIFT, null, null, null, null, null),
-				(Driver) UserFactory.createUser("Driver", "Driver 3", "303 Birch St", "San Bernardino County", Shift.THIRD_SHIFT, null, null, null, null, null),
+				(Driver) UserFactory.createUser("Driver", "Driver 1", "101 Pine St", "LA County", Shift.THIRD_SHIFT, null, null, null, null, null),
+				(Driver) UserFactory.createUser("Driver", "Driver 2", "202 Maple St", "Orange County", Shift.THIRD_SHIFT, null, null, null, null, null)
+				/*(Driver) UserFactory.createUser("Driver", "Driver 3", "303 Birch St", "San Bernardino County", Shift.THIRD_SHIFT, null, null, null, null, null),
 				(Driver) UserFactory.createUser("Driver", "Driver 4", "1140 Allen Ave", "San Bernardino County", Shift.THIRD_SHIFT, null, null, null, null, null),
 				(Driver) UserFactory.createUser("Driver", "Driver 5", "800 Glenoaks Blvd", "LA County", Shift.THIRD_SHIFT, null, null, null, null, null),
 				(Driver) UserFactory.createUser("Driver", "Driver 6", "521 Kellogg Drive", "San Bernardino County", Shift.THIRD_SHIFT, null, null, null, null, null),
