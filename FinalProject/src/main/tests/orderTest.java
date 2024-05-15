@@ -15,6 +15,7 @@ public class orderTest {
         Driver testDriver = new Driver("Testriver", "Fake Apartment Ave", "LA County", testShift);
         Order testOrder = new Order(testRestaurant, testCustomer, testDriver);
 
+        //not finished
         boolean testVariable = testOrder.placeOrder();
         boolean expected = true;
         assertEquals(expected, testVariable);
