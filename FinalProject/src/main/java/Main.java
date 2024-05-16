@@ -4,7 +4,6 @@ public class Main {
 	public static void main(String[] args) {
 
 		// Define the menu and meals
-		//List<String> menu = Arrays.asList("Menu item 1", "Menu item 2", "Menu item 3", "Menu Item 4");
 		menuItem beans = new beans("Beans");
 		menuItem cheese = new cheese("Cheese");
 		menuItem chili = new chili("Chili");

@@ -10,7 +10,6 @@ public class UserFactory {
             case "Driver":
                 return new Driver(name, address, county, shift);
             case "Restaurant":
-                //menu = Arrays.asList();
                 meals.put("Carbs", Arrays.asList("Cheese", "Bread", "Lentils", "Pistachio"));
                 meals.put("Protein", Arrays.asList("Fish", "Chicken", "Beef", "Tofu"));
                 meals.put("Fats", Arrays.asList("Avocado", "Sour cream", "Tuna", "Peanuts"));
