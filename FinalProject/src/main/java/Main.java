@@ -4,7 +4,16 @@ public class Main {
 	public static void main(String[] args) {
 
 		// Define the menu and meals
-		List<String> menu = Arrays.asList("Menu item 1", "Menu item 2", "Menu item 3", "Menu Item 4");
+		//List<String> menu = Arrays.asList("Menu item 1", "Menu item 2", "Menu item 3", "Menu Item 4");
+		menuItem beans = new beans("Beans");
+		menuItem cheese = new cheese("Cheese");
+		menuItem chili = new chili("Chili");
+		menuItem chiliFlakes = new chiliFlakes("ChiliFlakes");
+		menuItem choppedTomato = new choppedTomato("Chopped Tomato");
+		menuItem ketchup = new ketchup("Ketchup");
+
+		List<menuItem> menuItem1 = Arrays.asList(beans, cheese, chili);
+		List<menuItem> menuItem2 = Arrays.asList(chiliFlakes, choppedTomato, ketchup);
 		Map<String, List<String>> meals = new HashMap<>();
 		meals.put("Carbs", Arrays.asList("Cheese", "Bread", "Lentils", "Pistachio"));
 		meals.put("Protein", Arrays.asList("Fish", "Chicken", "Beef", "Tofu"));
@@ -39,10 +48,10 @@ public class Main {
 
 		// Create restaurants
 		List<Restaurant> restaurants = Arrays.asList(
-				(Restaurant) UserFactory.createUser("Restaurant", "The Good Food", "111 Cedar St", "LA County", null, null, "00:00 - 22:00", "Mexican", menu, meals),
-				(Restaurant) UserFactory.createUser("Restaurant", "Healthy Eats", "222 Spruce St", "Orange County", null, null, "00:00 - 21:00", "Asian", menu, meals),
-				(Restaurant) UserFactory.createUser("Restaurant", "Joe's Steakhouse", "333 Palm St", "San Bernardino County", null, null, "00:00 - 20:00", "American", menu, meals),
-				(Restaurant) UserFactory.createUser("Restaurant", "Burger Town", "333 Palm St", "LA County", null, null, "00:00 - 20:00", "American", menu, meals)
+				(Restaurant) UserFactory.createUser("Restaurant", "The Good Food", "111 Cedar St", "LA County", null, null, "00:00 - 22:00", "Mexican", menuItem1, meals),
+				(Restaurant) UserFactory.createUser("Restaurant", "Healthy Eats", "222 Spruce St", "Orange County", null, null, "00:00 - 21:00", "Asian", menuItem1, meals),
+				(Restaurant) UserFactory.createUser("Restaurant", "Joe's Steakhouse", "333 Palm St", "San Bernardino County", null, null, "00:00 - 20:00", "American", menuItem1, meals),
+				(Restaurant) UserFactory.createUser("Restaurant", "Burger Town", "333 Palm St", "LA County", null, null, "00:00 - 20:00", "American", menuItem1, meals)
 		);
 
 		// Register observers
