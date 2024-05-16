@@ -1,15 +1,21 @@
 public enum Shift {
-    FIRST_SHIFT("8AM - 4PM"),
-    SECOND_SHIFT("4PM - 12AM"),
-    THIRD_SHIFT("12AM - 8AM");
+    FIRST_SHIFT("08:00", "16:00"),
+    SECOND_SHIFT("16:00", "00:00"),
+    THIRD_SHIFT("00:00", "08:00");
 
-    private final String time;
+    private final String startTime;
+    private final String endTime;
 
-    Shift(String time) {
-        this.time = time;
+    Shift(String startTime, String endTime) {
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
-    public String getTime() {
-        return time;
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
     }
 }

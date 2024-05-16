@@ -14,6 +14,7 @@ public class UserFactory {
                 meals.put("Carbs", Arrays.asList("Cheese", "Bread", "Lentils", "Pistachio"));
                 meals.put("Protein", Arrays.asList("Fish", "Chicken", "Beef", "Tofu"));
                 meals.put("Fats", Arrays.asList("Avocado", "Sour cream", "Tuna", "Peanuts"));
+
                 return new Restaurant(name, address, county, operatingHours, cuisineType, menu, meals);
             default:
                 throw new IllegalArgumentException("Unknown user type");

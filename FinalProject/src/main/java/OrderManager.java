@@ -3,7 +3,7 @@ import java.util.List;
 
 public class OrderManager {
     private static OrderManager instance;
-    private List<Observer> observers = new ArrayList<>();
+    private final List<Observer> observers = new ArrayList<>();
 
     private OrderManager() {}
 
