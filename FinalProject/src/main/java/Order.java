@@ -30,6 +30,7 @@ public class Order {
             this.orderCreationTime = LocalDateTime.now();
             this.orderPickupTime = this.orderCreationTime.plusHours(1); // Example: pickup time is 1 hour after creation
             this.orderDeliveryTime = this.orderPickupTime.plusHours(1); // Example: delivery time is 1 hour after pickup
+            generateFoodItems();
             return true;
         }
 
@@ -46,11 +47,8 @@ public class Order {
         return false;
     }
 
-    // Create the order and print the details
-    public void printOrder(Order order){
-
+    public void printOrder(Order order) {
         if (order.placeOrder()) {
-            order.generateFoodItems();
             order.setOrderPickupTime(LocalDateTime.now().plusHours(1)); // Pickup time is 1 hour from now
             order.setOrderDeliveryTime(LocalDateTime.now().plusHours(2)); // Delivery time is 2 hours from now
 
@@ -67,19 +65,17 @@ public class Order {
             System.out.println("Driver Address: " + order.getDriver().getAddress());
             System.out.println("Driver County: " + order.getDriver().getCounty());
             System.out.println("Driver Shift: " + order.getDriver().getShift().getStartTime() + " - " + order.getDriver().getShift().getEndTime());
-            System.out.println("\n" + order.getRestaurant().getName() + " Food Items: " + order.getFoodItems());
+            System.out.println("\n" + order.getCustomer().getName() + "'s food items in their meal: " + order.getFoodItems());
             System.out.println("Order Creation Time: " + order.getOrderCreationTime());
             System.out.println("Order Pickup Time: " + order.getOrderPickupTime());
             System.out.println("Order Delivery Time: " + order.getOrderDeliveryTime());
         }
     }
 
-    // Check to see if order time is during restaurant's operating hours
     private boolean isWithinOperatingHours(LocalTime currentTime, LocalTime openingTime, LocalTime closingTime) {
         return !currentTime.isBefore(openingTime) && !currentTime.isAfter(closingTime);
     }
 
-    // Check to see if order time is during driver's shift
     private boolean isWithinDriverShift(LocalTime currentTime, Shift shift) {
         LocalTime shiftStartTime = LocalTime.parse(shift.getStartTime());
         LocalTime shiftEndTime = LocalTime.parse(shift.getEndTime());
@@ -91,72 +87,48 @@ public class Order {
         }
     }
 
-    private boolean isSameCounty(){
+    private boolean isSameCounty() {
         return driver.getCounty().equals(restaurant.getCounty()) && driver.getCounty().equals(customer.getCounty());
     }
 
-    // Selects macros depending on dietary restrictions
-    private String selectProtein(Random random, DietaryRestriction dietaryRestriction) {
-        switch (dietaryRestriction) {
-            case NO_RESTRICTION, NUT_ALLERGY:
-                String[] proteinNoRestriction = {"Fish", "Chicken", "Beef", "Tofu"};
-                return proteinNoRestriction[random.nextInt(proteinNoRestriction.length)];
-            case PALEO:
-                String[] proteinPaleo = {"Fish", "Chicken", "Beef"};
-                return proteinPaleo[random.nextInt(proteinPaleo.length)];
-            case VEGAN:
-                return "Tofu";
-            default:
-                return null;
-        }
-    }
-
-    private String selectCarb(Random random, DietaryRestriction dietaryRestriction) {
-        switch (dietaryRestriction) {
-            case NO_RESTRICTION:
-                String[] carbsNoRestriction = {"Cheese", "Bread", "Lentils", "Pistachio"};
-                return carbsNoRestriction[random.nextInt(carbsNoRestriction.length)];
-            case PALEO:
-                return "Pistachio";
-            case VEGAN:
-                String[] carbsVegan = {"Bread", "Lentils"};
-                return carbsVegan[random.nextInt(carbsVegan.length)];
-            case NUT_ALLERGY:
-                String[] carbsNutAllergy = {"Cheese", "Bread", "Lentils"};
-                return carbsNutAllergy[random.nextInt(carbsNutAllergy.length)];
-            default:
-                return null;
-        }
-    }
-
-    private String selectFat(Random random, DietaryRestriction dietaryRestriction) {
-        switch (dietaryRestriction) {
-            case NO_RESTRICTION:
-                String[] fatsNoRestriction = {"Avocado", "Sour cream", "Tuna", "Peanuts"};
-                return fatsNoRestriction[random.nextInt(fatsNoRestriction.length)];
-            case PALEO:
-                String[] fatsPaleo = {"Avocado", "Tuna"};
-                return fatsPaleo[random.nextInt(fatsPaleo.length)];
-            case VEGAN:
-                return "Avocado";
-            case NUT_ALLERGY:
-                String[] fatsNutAllergy = {"Avocado", "Sour cream", "Tuna"};
-                return fatsNutAllergy[random.nextInt(fatsNutAllergy.length)];
-            default:
-                return null;
-        }
-    }
-
-    // Generate food items based on dietary restriction
+    // Generate food items based on dietary restriction and restaurant menu using MealService
     public void generateFoodItems() {
         Random random = new Random();
-        String protein = selectProtein(random, dietaryRestriction);
-        String carb = selectCarb(random, dietaryRestriction);
-        String fat = selectFat(random, dietaryRestriction);
+        List<Meal> suitableMeals = new ArrayList<>();
+        for (Meal meal : restaurant.getMenu()) {
+            if (MealChecker.isMealSuitable(meal.getDescription(), dietaryRestriction)) {
+                suitableMeals.add(meal);
+            }
+        }
 
-        if (protein != null) this.foodItems.add(protein);
-        if (carb != null) this.foodItems.add(carb);
-        if (fat != null) this.foodItems.add(fat);
+        if (!suitableMeals.isEmpty()) {
+            Meal selectedMeal = suitableMeals.get(random.nextInt(suitableMeals.size()));
+            int toppingCount = random.nextInt(3); // Randomly choose 0, 1, or 2 toppings
+            for (int i = 0; i < toppingCount; i++) {
+                int toppingType = random.nextInt(5); // Randomly choose one of the five toppings
+                switch (toppingType) {
+                    case 0:
+                        selectedMeal = new Toppings.LemonTopping(selectedMeal);
+                        break;
+                    case 1:
+                        selectedMeal = new Toppings.ExtraRiceTopping(selectedMeal);
+                        break;
+                    case 2:
+                        selectedMeal = new Toppings.ExtraTofuTopping(selectedMeal);
+                        break;
+                    case 3:
+                        selectedMeal = new Toppings.ExtraCheeseTopping(selectedMeal);
+                        break;
+                    case 4:
+                        selectedMeal = new Toppings.KetchupTopping(selectedMeal);
+                        break;
+                }
+            }
+
+            foodItems.add(selectedMeal.getDescription());
+        } else {
+            foodItems.add("No suitable meals available");
+        }
     }
 
     // Add a food item to the order
