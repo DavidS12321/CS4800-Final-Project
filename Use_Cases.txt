@@ -15,3 +15,7 @@ Customer plays movie. Customer pauses movie. Customer browses movie library. Cus
 Pay Bill
 Customer
 Customer recieves reminder that his monthly bill is due. Customer logs in and pays the amount due.
+
+Create Account
+Customer
+Customer creates an account. Customer then logs in and watches a video.
