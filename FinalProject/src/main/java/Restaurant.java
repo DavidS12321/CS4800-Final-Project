@@ -31,4 +31,7 @@ public class Restaurant extends User {
 	public Map<String, List<String>> getMeals() {
 		return meals;
 	}
+	public boolean equals(Restaurant other) {
+		return super.equals(other);
+	}
 }

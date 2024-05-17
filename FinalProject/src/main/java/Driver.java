@@ -17,4 +17,7 @@ public class Driver extends User implements Observer {
 	public Shift getShift() {
 		return shift;
 	}
+	public boolean equals(Driver other) {
+		return super.equals(other) && shift.equals(other.getShift());
+	}
 }

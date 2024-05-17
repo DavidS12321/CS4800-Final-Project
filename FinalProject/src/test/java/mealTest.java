@@ -67,7 +67,7 @@ public class mealTest {
     {
         Meal tofuMeal = new TofuMeal();
         Meal tofuMealwithTofu = new Toppings.ExtraTofuTopping(tofuMeal);
-        String expected = "Tofu with Lentils and Avacado, with extra tofu";
+        String expected = "Tofu with Lentils and Avocado, with extra tofu";
         String testGD = tofuMealwithTofu.getDescription();
         assertEquals(expected, testGD);
     }

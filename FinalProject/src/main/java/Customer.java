@@ -17,4 +17,7 @@ public class Customer extends User implements Observer{
 	public DietaryRestriction getDietaryRestriction() {
 		return dietaryRestriction;
 	}
+	public boolean equals(Customer other) {
+		return super.equals(other) && dietaryRestriction.equals(other.getDietaryRestriction());
+	}
 }

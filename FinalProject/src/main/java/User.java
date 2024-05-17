@@ -21,4 +21,7 @@ public abstract class User {
     public String getCounty() {
         return county;
     }
+    public boolean equals(User other) {
+        return name.equals(other.getName()) && address.equals(other.getAddress()) && county.equals(other.getCounty());
+    }
 }

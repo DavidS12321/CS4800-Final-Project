@@ -6,16 +6,16 @@ public class userFactoryTest {
     @Test 
     public void testUserFactorySame()
     {
-        User user1 = UserFactory.createUser("Customer", "Test", "Test House", "LA Ciunty", null, DietaryRestriction.NO_RESTRICTION, null, null, null, null);
-        User user2 = UserFactory.createUser("Customer", "Test", "Test House", "LA Ciunty", null, DietaryRestriction.NO_RESTRICTION, null, null, null, null);
-        assertSame(user1, user2);
+        User user1 = UserFactory.createUser("Customer", "Test", "Test House", "LA County", null, DietaryRestriction.NO_RESTRICTION, null, null, null, null);
+        User user2 = UserFactory.createUser("Customer", "Test", "Test House", "LA County", null, DietaryRestriction.NO_RESTRICTION, null, null, null, null);
+        assertTrue(user1.equals(user2));
     }
 
     @Test 
     public void testUserFactoryDif()
     {
-        User user1 = UserFactory.createUser("Customer", "Test", "Test House", "LA Ciunty", null, DietaryRestriction.NO_RESTRICTION, null, null, null, null);
-        User user2 = UserFactory.createUser("Customer", "Test", "Test House", "LA Ciunty", null, DietaryRestriction.NUT_ALLERGY, null, null, null, null);
-        assertNotSame(user1, user2);
+        Customer user1 = (Customer) UserFactory.createUser("Customer", "Test", "Test House", "LA County", null, DietaryRestriction.NO_RESTRICTION, null, null, null, null);
+        Customer user2 = (Customer) UserFactory.createUser("Customer", "Test", "Test House", "LA County", null, DietaryRestriction.NUT_ALLERGY, null, null, null, null);
+        assertFalse(user1.equals(user2));
     }
 }
