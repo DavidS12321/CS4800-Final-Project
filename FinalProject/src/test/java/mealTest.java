@@ -1,10 +1,5 @@
 import org.junit.jupiter.api.*;
 
-import Toppings.ExtraCheeseTopping;
-import Toppings.ExtraRiceTopping;
-import Toppings.ExtraTofuTopping;
-import Toppings.LemonTopping;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -51,7 +46,7 @@ public class mealTest {
     public void testLemonTopping()
     {
         Meal chickenMeal = new ChickenMeal();
-        Meal chickenMealWithLemon = LemonTopping(chickenMeal);
+        Meal chickenMealWithLemon = new Toppings.LemonTopping(chickenMeal);
         String expected = "Chicken with Bread and Cheese, with Lemon Topping";
         String testGD = chickenMealWithLemon.getDescription();
         assertEquals(expected, testGD);
@@ -61,7 +56,7 @@ public class mealTest {
     public void testRiceTopping()
     {
         Meal tofuMeal = new TofuMeal();
-        Meal tofuMealwithRice = ExtraRiceTopping(tofuMeal);
+        Meal tofuMealwithRice = new Toppings.ExtraRiceTopping(tofuMeal);
         String expected = "Tofu with Lentils and Avocado, with extra rice";
         String testGD = tofuMealwithRice.getDescription();
         assertEquals(expected, testGD);
@@ -71,7 +66,7 @@ public class mealTest {
     public void testTofuTopping()
     {
         Meal tofuMeal = new TofuMeal();
-        Meal tofuMealwithTofu = ExtraTofuTopping(tofuMeal);
+        Meal tofuMealwithTofu = new Toppings.ExtraTofuTopping(tofuMeal);
         String expected = "Tofu with Lentils and Avacado, with extra tofu";
         String testGD = tofuMealwithTofu.getDescription();
         assertEquals(expected, testGD);
@@ -81,7 +76,7 @@ public class mealTest {
     public void testCheeseTopping()
     {
         Meal beefMeal = new BeefMeal();
-        Meal beefMealwithCheese = ExtraCheeseTopping(beefMeal);
+        Meal beefMealwithCheese = new Toppings.ExtraCheeseTopping(beefMeal);
         String expected = "Beef with Pistachio and Tuna, with extra cheese";
         String testGD = beefMealwithCheese.getDescription();
         assertEquals(expected, testGD);
@@ -91,7 +86,7 @@ public class mealTest {
     public void testKetchupTopping()
     {
         Meal chickenMeal = new ChickenMeal();
-        Meal chickenMealwithKetchup = KetchupTopping(chickenMeal);
+        Meal chickenMealwithKetchup = new Toppings.KetchupTopping(chickenMeal);
         String expected = "Chicken with Bread and Cheese, with ketchup";
         String testGD = chickenMealwithKetchup.getDescription();
         assertEquals(expected, testGD);

@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
+import java.util.*;
 
 public class orderTest {
     List<Meal> menuOne = new ArrayList<>();
@@ -12,10 +13,10 @@ public class orderTest {
         Customer customer = new Customer("Fake Name", "Fake Apartment", "LA County", DietaryRestriction.NO_RESTRICTION);
         Driver driver = new Driver("Driver", "Restaurant Address", "LA County", Shift.FIRST_SHIFT);
 
-        Order orderTest = new Order(restaurant, driver, customer);
+        Order orderTest = new Order(restaurant, customer,driver);
 
-        Boolean orderPlaced = orderTest.placeOrder();
-        assertTrue(true, orderPlaced);
+        boolean orderPlaced = orderTest.placeOrder();
+        assertTrue(orderPlaced);
 
 
     }
