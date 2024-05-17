@@ -24,8 +24,7 @@ public class Restaurant extends User {
 	}
 
 	public List<menuItem> getMenu() {
-		for(menuItem menuLoop : menu)
-		{
+		for(menuItem menuLoop : menu) {
 			menuLoop.displayItem();
 		}
 		return menu;

@@ -1,3 +1,3 @@
 public interface menuItem {
-    public String displayItem();
+    public void displayItem();
 }

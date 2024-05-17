@@ -7,8 +7,7 @@ public class chiliFlakes extends Topping{
         super(chiliFlakesName);
     }
 
-    public String displayItem()
+    public void displayItem()
     {
-        return this.chiliFlakesName;
     }
 }

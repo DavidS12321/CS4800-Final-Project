@@ -7,8 +7,7 @@ public class ketchup extends Topping{
         super(ketchupName);
     }
 
-    public String displayItem()
+    public void displayItem()
     {
-        return this.ketchupName;
     }
 }

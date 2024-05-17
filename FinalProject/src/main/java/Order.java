@@ -47,19 +47,12 @@ public class Order {
     }
 
     // Create the order and print the details
-    public void printOrder(){
-        OrderManager orderManager = OrderManager.getInstance();
-        orderManager.addObserver(customer);
-        orderManager.addObserver(driver);
+    public void printOrder(Order order){
 
-        Order order = new Order(restaurant, customer, driver);
         if (order.placeOrder()) {
             order.generateFoodItems();
             order.setOrderPickupTime(LocalDateTime.now().plusHours(1)); // Pickup time is 1 hour from now
             order.setOrderDeliveryTime(LocalDateTime.now().plusHours(2)); // Delivery time is 2 hours from now
-
-            // Notify observers
-            orderManager.notifyObservers("Order is ready for pickup.");
 
             // Print order details
             System.out.println("\nOrder Details:");

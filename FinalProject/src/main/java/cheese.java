@@ -7,8 +7,7 @@ public class cheese extends Topping{
         super(cheeseName);
     }
 
-    public String displayItem()
+    public void displayItem()
     {
-        return this.cheeseName;
     }
 }

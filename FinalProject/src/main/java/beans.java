@@ -7,8 +7,7 @@ public class beans extends Topping{
     }
 
     @Override
-    public String displayItem()
+    public void displayItem()
     {
-        return this.beansName;
     }
 }

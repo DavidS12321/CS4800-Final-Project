@@ -7,8 +7,7 @@ public class choppedTomato extends Topping{
         super(choppedTomatoName);
     }
 
-    public String displayItem()
+    public void displayItem()
     {
-        return this.choppedTomatoName;
     }
 }
