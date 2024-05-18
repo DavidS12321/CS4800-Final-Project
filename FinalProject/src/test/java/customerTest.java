@@ -1,5 +1,7 @@
-import org.junit.jupiter.api.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.Before;
+import org.junit.Test;
+import java.util.List;
+import static org.junit.Assert.*;
 
 public class customerTest {
 

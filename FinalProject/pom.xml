@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>FinalProject</artifactId>
+    <artifactId>Proxy</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -15,7 +15,7 @@
     </properties>
 
     <dependencies>
-        <!--   https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter   -->
+        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
@@ -29,4 +29,5 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
 </project>

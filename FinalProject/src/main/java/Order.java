@@ -48,29 +48,26 @@ public class Order {
     }
 
     public void printOrder(Order order) {
-        if (order.placeOrder()) {
-            order.setOrderPickupTime(LocalDateTime.now().plusHours(1)); // Pickup time is 1 hour from now
-            order.setOrderDeliveryTime(LocalDateTime.now().plusHours(2)); // Delivery time is 2 hours from now
-
-            // Print order details
-            System.out.println("\nOrder Details:");
-            System.out.println("\nRestaurant: " + order.getRestaurant().getName());
-            System.out.println("Restaurant Menu: " + order.getRestaurant().getMenu());
-            System.out.println("Restaurant Cuisine: " + order.getRestaurant().getCuisineType());
-            System.out.println("\nCustomer: " + order.getCustomer().getName());
-            System.out.println("Customer Address: " + order.getCustomer().getAddress());
-            System.out.println("Customer County: " + order.getCustomer().getCounty());
-            System.out.println("Dietary Restriction: " + order.getDietaryRestriction());
-            System.out.println("\nDriver: " + order.getDriver().getName());
-            System.out.println("Driver Address: " + order.getDriver().getAddress());
-            System.out.println("Driver County: " + order.getDriver().getCounty());
-            System.out.println("Driver Shift: " + order.getDriver().getShift().getStartTime() + " - " + order.getDriver().getShift().getEndTime());
-            System.out.println("\n" + order.getCustomer().getName() + "'s food items in their meal: " + order.getFoodItems());
-            System.out.println("Order Creation Time: " + order.getOrderCreationTime());
-            System.out.println("Order Pickup Time: " + order.getOrderPickupTime());
-            System.out.println("Order Delivery Time: " + order.getOrderDeliveryTime());
-        }
+        // Print order details
+        System.out.println("\nOrder Details:");
+        System.out.println("\nRestaurant: " + order.getRestaurant().getName());
+        System.out.println("Restaurant Menu: " + order.getRestaurant().getMenu());
+        System.out.println("Restaurant Cuisine: " + order.getRestaurant().getCuisineType());
+        System.out.println("\nCustomer: " + order.getCustomer().getName());
+        System.out.println("Customer Address: " + order.getCustomer().getAddress());
+        System.out.println("Customer County: " + order.getCustomer().getCounty());
+        System.out.println("Dietary Restriction: " + order.getDietaryRestriction());
+        System.out.println("\nDriver: " + order.getDriver().getName());
+        System.out.println("Driver Address: " + order.getDriver().getAddress());
+        System.out.println("Driver County: " + order.getDriver().getCounty());
+        System.out.println("Driver Shift: " + order.getDriver().getShift().getStartTime() + " - " + order.getDriver().getShift().getEndTime());
+        System.out.println("\n" + order.getCustomer().getName() + "'s food items in their meal: " + order.getFoodItems());
+        System.out.println("\nOrder Creation Time: " + order.getOrderCreationTime());
+        System.out.println("Order Pickup Time: " + order.getOrderPickupTime());
+        System.out.println("Order Delivery Time: " + order.getOrderDeliveryTime());
+        System.out.println("------------------------------------------------------------------------------------------------------------------------------------");
     }
+
 
     private boolean isWithinOperatingHours(LocalTime currentTime, LocalTime openingTime, LocalTime closingTime) {
         return !currentTime.isBefore(openingTime) && !currentTime.isAfter(closingTime);
