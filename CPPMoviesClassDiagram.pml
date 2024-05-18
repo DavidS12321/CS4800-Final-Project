@@ -10,6 +10,9 @@ pause()
 changeVolume()
 toggleSubtitles()
 scrubTo()
+getMetadata()
+getRating()
+rate()
 }
 class User {
 getCurrentVideo()
@@ -22,6 +25,8 @@ deleteAccount()
 interface Library {
 seeAvailableVideos()
 getVideo()
+}
+class MainServer {
 addVideo()
 removeVideo()
 }
@@ -30,8 +35,8 @@ Library <|-- MainServer
 Library <|-- ProxyServer
 MainServer "1"*--"*" Video
 User "*" o-- "1" ProxyServer
-ProxyServer "*"--"*" ProxyServer
-ProxyServer "*"--"0-1" MainServer
+ProxyServer "*" o--"*" ProxyServer
+ProxyServer "*" o--"0-1" MainServer
 User "*" o-- "0-1" Video
 ProxyServer : retrieveVideo()
 @enduml
