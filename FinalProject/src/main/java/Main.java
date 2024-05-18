@@ -10,11 +10,11 @@ public class Main {
 		Meal beefMeal = new BeefMeal();
 
 		// Create menu
-		List<Meal> menuOne = new ArrayList<>();
-		menuOne.add(fishMeal);
-		menuOne.add(tofuMeal);
-		menuOne.add(chickenMeal);
-		menuOne.add(beefMeal);
+		List<Meal> menu = new ArrayList<>();
+		menu.add(fishMeal);
+		menu.add(tofuMeal);
+		menu.add(chickenMeal);
+		menu.add(beefMeal);
 
 		// Create a map for food items and their categories
 		Map<String, List<String>> meals = new HashMap<>();
@@ -45,10 +45,10 @@ public class Main {
 
 		// Create restaurants
 		List<Restaurant> restaurants = new ArrayList<>();
-		restaurants.add((Restaurant) UserFactory.createUser("Restaurant", "Restaurant 1", "301 Cedar St", "LA County", null, null, "00:00 - 23:59", "American", menuOne, meals));
-		restaurants.add((Restaurant) UserFactory.createUser("Restaurant", "Restaurant 2", "302 Cedar St", "Orange County", null, null, "00:00 - 23:59", "Mexican", menuOne, meals));
-		restaurants.add((Restaurant) UserFactory.createUser("Restaurant", "Restaurant 3", "303 Cedar St", "San Bernardino County", null, null, "00:00 - 23:59", "American", menuOne, meals));
-		restaurants.add((Restaurant) UserFactory.createUser("Restaurant", "Restaurant 4", "304 Cedar St", "LA County", null, null, "00:00 - 23:59", "Asian", menuOne, meals));
+		restaurants.add((Restaurant) UserFactory.createUser("Restaurant", "Restaurant 1", "301 Cedar St", "LA County", null, null, "00:00 - 23:59", "American", menu, meals));
+		restaurants.add((Restaurant) UserFactory.createUser("Restaurant", "Restaurant 2", "302 Cedar St", "Orange County", null, null, "00:00 - 23:59", "Mexican", menu, meals));
+		restaurants.add((Restaurant) UserFactory.createUser("Restaurant", "Restaurant 3", "303 Cedar St", "San Bernardino County", null, null, "00:00 - 23:59", "American", menu, meals));
+		restaurants.add((Restaurant) UserFactory.createUser("Restaurant", "Restaurant 4", "304 Cedar St", "LA County", null, null, "00:00 - 23:59", "Asian", menu, meals));
 
 		// Initialize OrderManager and add observers
 		OrderManager orderManager = OrderManager.getInstance();
