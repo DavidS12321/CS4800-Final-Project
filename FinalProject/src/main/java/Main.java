@@ -44,10 +44,10 @@ public class Main {
 
 		// Create restaurants
 		List<Restaurant> restaurants = new ArrayList<>();
-		restaurants.add((Restaurant) UserFactory.createUser("Restaurant", "Restaurant 1", "301 Cedar St", "LA County", null, null, "00:00 - 08:00", "Cuisine 1", menuOne, meals));
-		restaurants.add((Restaurant) UserFactory.createUser("Restaurant", "Restaurant 2", "302 Cedar St", "LA County", null, null, "00:00 - 08:00", "Cuisine 2", menuOne, meals));
-		restaurants.add((Restaurant) UserFactory.createUser("Restaurant", "Restaurant 3", "303 Cedar St", "LA County", null, null, "00:00 - 08:00", "Cuisine 3", menuOne, meals));
-		restaurants.add((Restaurant) UserFactory.createUser("Restaurant", "Restaurant 4", "304 Cedar St", "LA County", null, null, "00:00 - 08:00", "Cuisine 4", menuOne, meals));
+		restaurants.add((Restaurant) UserFactory.createUser("Restaurant", "Restaurant 1", "301 Cedar St", "LA County", null, null, "00:00 - 23:59", "Cuisine 1", menuOne, meals));
+		restaurants.add((Restaurant) UserFactory.createUser("Restaurant", "Restaurant 2", "302 Cedar St", "LA County", null, null, "00:00 - 23:59", "Cuisine 2", menuOne, meals));
+		restaurants.add((Restaurant) UserFactory.createUser("Restaurant", "Restaurant 3", "303 Cedar St", "LA County", null, null, "00:00 - 23:59", "Cuisine 3", menuOne, meals));
+		restaurants.add((Restaurant) UserFactory.createUser("Restaurant", "Restaurant 4", "304 Cedar St", "LA County", null, null, "00:00 - 23:59", "Cuisine 4", menuOne, meals));
 
 		// Initialize OrderManager and add observers
 		OrderManager orderManager = OrderManager.getInstance();
