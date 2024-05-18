@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Restaurant extends User {
+
 	private final String operatingHours;
 	private final LocalTime openingTime;
 	private final LocalTime closingTime;
@@ -43,10 +44,12 @@ public class Restaurant extends User {
 	public Map<String, List<String>> getMeals() {
 		return meals;
 	}
+
 	public boolean isOpen() {
 		LocalTime now = LocalTime.now();
 		return now.compareTo(openingTime)>0 && now.compareTo(closingTime) < 0;
 	}
+
 	public boolean equals(Restaurant other) {
 		return super.equals(other);
 	}

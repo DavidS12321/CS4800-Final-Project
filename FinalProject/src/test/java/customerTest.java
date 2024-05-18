@@ -3,7 +3,7 @@ import org.junit.Test;
 import java.util.List;
 import static org.junit.Assert.*;
 
-public class customerTest {
+public class CustomerTest {
 
     DietaryRestriction NoRestriction = DietaryRestriction.NO_RESTRICTION;
     Customer customer = new Customer("Test Customer", "Random House", "LA County", NoRestriction);
