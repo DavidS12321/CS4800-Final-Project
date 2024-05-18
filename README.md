@@ -1,10 +1,14 @@
-#Part One: Food Delivery App
+# Part One: Food Delivery App
 
-#Design Patterns Used
+This application is designed to manage a food delivery service. It includes features for creating and managing customers, drivers, and restaurants, placing orders, and applying dietary restrictions and meal toppings.
 
-#1. Singleton Pattern
-The Singleton Pattern is used to manage orders through the OrderManager class. This pattern ensures that there is only one instance of the OrderManager class throughout the application, providing a global point of access to it.
+## Design Patterns Used
 
+### **1. Singleton Pattern**
+The Singleton Pattern is used to manage orders through the `OrderManager` class. This pattern ensures that there is only one instance of the `OrderManager` class throughout the application, providing a global point of access to it.
+
+**Usage:**
+```java
 public class OrderManager {
     private static OrderManager instance;
 
@@ -17,10 +21,13 @@ public class OrderManager {
         return instance;
     }
 }
+```
 
-#2. Decorator Pattern
+## 2. Decorator Pattern
 The Decorator Pattern is utilized to add toppings to meals dynamically. This pattern allows for the extension of meal functionalities by wrapping them with additional behaviors.
 
+**Usage:**
+```java
 public abstract class ToppingDecorator implements Meal {
     protected Meal decoratedMeal;
 
@@ -43,11 +50,13 @@ public class LemonTopping extends ToppingDecorator {
         return decoratedMeal.getDescription() + ", with Lemon Topping";
     }
 }
+```
 
-
-#3. Factory Pattern
+## 3. Factory Pattern
 The Factory Pattern is used to create instances of different user types such as customers, drivers, and restaurants. This pattern provides a way to encapsulate the instantiation logic and return objects of a common interface.
 
+**Usage:**
+```java
 public class UserFactory {
     public static User createUser(String type, String name, String address, String county, Shift shift, DietaryRestriction dietaryRestriction,
                                   String operatingHours, String cuisineType, List<Meal> menu, Map<String, List<String>> meals) {
@@ -63,9 +72,13 @@ public class UserFactory {
         }
     }
 }
+```
 
-#4. Observer Pattern
+## 4. Observer Pattern
 The Observer Pattern is implemented to allow customers and drivers to receive updates about their orders. The OrderManager class maintains a list of observers and notifies them of any changes to the orders.
+
+**Usage:**
+```java
 
 public class OrderManager {
     private List<Observer> observers = new ArrayList<>();
@@ -80,3 +93,4 @@ public class OrderManager {
         }
     }
 }
+```
