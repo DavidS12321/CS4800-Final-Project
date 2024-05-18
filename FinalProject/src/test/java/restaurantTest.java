@@ -3,7 +3,7 @@ import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class restaurantTest {
+public class RestaurantTest {
 
 
     @Test
