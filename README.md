@@ -94,3 +94,19 @@ public class OrderManager {
     }
 }
 ```
+# Part Two: Use Cases
+
+## Play Movie
+Customer browses list of movies. Customer selects movie to play. Movie begins playing.
+
+## Movie Release
+Distributer sells movie to CPPMovies. CPPMovies adds movie to libary.
+
+## Pause Movie
+Customer plays movie. Customer pauses movie. Customer browses movie library. Customer returns to movie and plays from saved position.
+
+## Pay Bill
+Customer recieves reminder that his monthly bill is due. Customer logs in and pays the amount due.
+
+## Create Account
+Customer creates an account. Customer then logs in and watches a video.
