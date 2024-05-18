@@ -9,7 +9,7 @@ public class orderTest {
     @Test 
     public void testPlaceOrder()
     {
-        Restaurant restaurant = new Restaurant("Test Restaurant", "Fake Address", "LA County", "00:00 - 08:00", "Cuisine 1", menuOne, meals);
+        Restaurant restaurant = new Restaurant("Test Restaurant", "Fake Address", "LA County", "00:00 - 23:59", "Cuisine 1", menuOne, meals);
         Customer customer = new Customer("Fake Name", "Fake Apartment", "LA County", DietaryRestriction.NO_RESTRICTION);
         Driver driver = new Driver("Driver", "Restaurant Address", "LA County", Shift.FIRST_SHIFT);
 
