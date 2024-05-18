@@ -4,6 +4,8 @@ import java.util.Map;
 
 public class Restaurant extends User {
 	private final String operatingHours;
+	private final LocalTime openingTime;
+	private final LocalTime closingTime;
 	private final String cuisineType;
 	private final List<Meal> menu;
 	private final Map<String, List<String>> meals;
@@ -15,6 +17,15 @@ public class Restaurant extends User {
 		this.cuisineType = cuisineType;
 		this.menu = menu;
 		this.meals = meals;
+		String[] times = operatingHours.split("-");
+		times[0]=times[0].strip();
+		times[1]=times[1].strip();
+		for(int i=0;i<2;i++) {
+			if (times[i].length() < 5)
+				times[i] = "0" + times[i];
+		}
+		openingTime=LocalTime.parse(times[0]);
+		closingTime=LocalTime.parse(times[1]);
 	}
 
 	public String getOperatingHours() {
@@ -34,7 +45,7 @@ public class Restaurant extends User {
 	}
 	public boolean isOpen() {
 		LocalTime now = LocalTime.now();
-		throw new RuntimeException("Not implemented yet");
+		return now.compareTo(openingTime)>0 && now.compareTo(closingTime) < 0;
 	}
 	public boolean equals(Restaurant other) {
 		return super.equals(other);
