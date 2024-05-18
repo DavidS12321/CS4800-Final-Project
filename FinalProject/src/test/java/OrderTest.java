@@ -2,7 +2,7 @@ import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.*;
 
-public class orderTest {
+public class OrderTest {
     List<Meal> menuOne = new ArrayList<>();
     Map<String, List<String>> meals = new HashMap<>();
     
