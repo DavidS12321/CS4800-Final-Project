@@ -45,7 +45,7 @@ public class DriverTest {
 
     @Test
     void testEquals() {
-        assertEquals(driver1, driver3); // Should be equal because all properties are the same
-        assertNotEquals(driver1, driver2); // Should not be equal because shifts are different
+        assertTrue(driver1.equals(driver3));
+        assertFalse(driver1.equals(driver2));
     }
 }
